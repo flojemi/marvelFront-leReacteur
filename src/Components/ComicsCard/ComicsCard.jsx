@@ -1,8 +1,8 @@
 //Chargement des styles
 import "./ComicsCard.css";
 
-export default function ComicsCard({ comicsDetails }) {
-  console.log("ComicsCard - ComicsDetails =>", comicsDetails);
+export default function ComicsCard({ comicsData }) {
+  // console.log("ComicsCard - ComicsDetails =>", comicsData);
 
   return (
     <div className="ComicsCard-container">
