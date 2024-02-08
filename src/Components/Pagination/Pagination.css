@@ -1,0 +1,10 @@
+.pagination-nav {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.pagination-hidden {
+  display: none;
+}

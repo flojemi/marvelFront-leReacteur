@@ -1,9 +1,38 @@
 import "./Pagination.css";
 
-export default function Pagination() {
+export default function Pagination({
+  currentPage,
+  setCurrentPage,
+  resultsNumber,
+  limitValue,
+}) {
+  const totalPage = Math.ceil(resultsNumber / limitValue);
+
+  const handlePreviousClick = () => {
+    setCurrentPage((currentPage) => currentPage - 1);
+  };
+
+  const handleNextClick = () => {
+    setCurrentPage((currentPage) => currentPage + 1);
+  };
+
   return (
-    <>
-      <p>This is my pagination</p>
-    </>
+    <div className="pagination-nav">
+      <button
+        onClick={handlePreviousClick}
+        className={currentPage > 1 ? "" : "pagination-hidden"}
+      >
+        Previous
+      </button>
+      <p>
+        {currentPage}/{totalPage}
+      </p>
+      <button
+        onClick={handleNextClick}
+        className={currentPage < totalPage ? "" : "pagination-hidden"}
+      >
+        Next
+      </button>
+    </div>
   );
 }

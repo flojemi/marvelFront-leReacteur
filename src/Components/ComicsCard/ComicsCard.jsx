@@ -6,7 +6,7 @@ export default function ComicsCard({ comicsData }) {
 
   return (
     <div className="ComicsCard-container">
-      <p>Ceci est une comics card</p>
+      <p>Ceci est une comics card, implémentation à réaliser</p>
     </div>
   );
 }
