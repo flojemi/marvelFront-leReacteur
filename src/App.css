@@ -1,0 +1,27 @@
+.app-wrapper {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(70, 70, 70, 0.891);
+  overflow-x: hidden;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.2);
+  border-top: 4px solid #ed1e25; /* Couleur rouge */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite; /* Animation de rotation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* TODO : Prévoir un changement d'affichage arrivé à 1250px de large */

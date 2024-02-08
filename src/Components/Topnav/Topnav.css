@@ -1,0 +1,50 @@
+nav {
+  width: 100vw;
+  background-color: rgb(41, 41, 41);
+  color: white;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.nav-container {
+  width: 1200px;
+  height: 50px;
+
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-buttons-container {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-button {
+  display: inline-block;
+  height: 30px;
+
+  background-color: #ed1e25;
+  border-radius: 5px;
+
+  color: white;
+  font-weight: bold;
+}
+
+.nav-button:hover {
+  cursor: pointer;
+}
+
+.marvel-logo {
+  height: 40px;
+  width: auto;
+  transition: transform 0.15s ease;
+}
+
+.marvel-logo:hover {
+  transform: scale(1.1);
+}
