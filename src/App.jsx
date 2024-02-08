@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 
 // Import des pages et composants
 import CardsPage from "./Pages/CardsPage/CardsPage";
-// import ComicsPage from "./Pages/ComicsPage/ComicsPage";
+import CharDetailsPage from "./Pages/CharDetailsPage/CharDetailsPage";
 import Topnav from "./Components/Topnav/Topnav";
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
             path="/characters"
             element={<CardsPage cardsType="characters" />}
           ></Route>
+          <Route path="/characters/:id" element={<CharDetailsPage />}></Route>
           <Route path="/comics" element={<CardsPage cardsType="comics" />}></Route>
         </Routes>
       </div>

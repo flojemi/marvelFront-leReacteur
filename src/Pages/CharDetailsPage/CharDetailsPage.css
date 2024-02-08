@@ -1,0 +1,41 @@
+.CharDetails-container {
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.left-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  width: 550px;
+  padding: 20px;
+
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.583);
+  border-radius: 10px;
+  background-color: rgb(10, 10, 10);
+
+  color: white;
+}
+
+.right-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  width: 600px;
+  border: 1px solid pink;
+  overflow-y: scroll;
+}

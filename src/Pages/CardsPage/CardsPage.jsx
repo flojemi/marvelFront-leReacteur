@@ -3,7 +3,7 @@ import "./CardsPage.css";
 
 // Import des packages
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // Import des composants
@@ -18,6 +18,7 @@ import Pagination from "../../Components/Pagination/Pagination";
 // LoadType correspond au type de cards à charger (characters, comics)
 export default function CardsPage({ cardsType }) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   // States setup
   const [isLoading, setIsLoading] = useState(true);
@@ -65,6 +66,11 @@ export default function CardsPage({ cardsType }) {
     fetchData();
   }, [cardsType, currentPage]);
 
+  // Handle functions
+  const handleCharClick = (charId) => {
+    navigate(`/characters/${charId}`, { state: { id: charId } });
+  };
+
   // JSX retourné
 
   /*
@@ -86,7 +92,11 @@ export default function CardsPage({ cardsType }) {
         <>
           {cardsType === "characters"
             ? data.map((characterData, index) => (
-                <CharacterCard key={characterData._id} characterData={characterData} />
+                <CharacterCard
+                  key={characterData._id}
+                  characterData={characterData}
+                  handleCharClick={handleCharClick}
+                />
               ))
             : cardsType === "comics" &&
               data.map((comicsData, index) => (
