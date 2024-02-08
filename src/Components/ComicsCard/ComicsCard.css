@@ -1,11 +1,12 @@
-.CharacterCard-container {
+.ComicsCard-container {
   height: 250px;
   width: 200px;
   box-shadow: 0 0 9px rgba(0, 0, 0, 0.583);
   border-radius: 10px;
+  background-color: rgb(10, 10, 10);
+  color: white;
 
   display: flex;
-  /* flex-wrap: wrap; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -14,12 +15,12 @@
   transition: transform 0.15s ease;
 }
 
-.CharacterCard-container:hover {
+.ComicsCard-container:hover {
   cursor: pointer;
   transform: scale(1.05);
 }
 
-.character-name {
+/* .character-name {
   height: 15px;
 }
 
@@ -28,4 +29,4 @@
   width: 100%;
   object-fit: cover;
   border-radius: 10px;
-}
+} */

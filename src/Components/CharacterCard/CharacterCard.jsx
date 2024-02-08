@@ -1,5 +1,5 @@
 // Chargement du style
-import "./CharactersCard.css";
+import "./CharacterCard.css";
 
 export default function CharacterCard({ characterData }) {
   //   console.log("CharacterCard - characterData =>\n", characterData);

@@ -7,8 +7,8 @@
 }
 
 .loader {
-  border: 4px solid rgba(0, 0, 0, 0.2);
-  border-top: 4px solid #ed1e25; /* Couleur rouge */
+  border: 8px solid rgba(0, 0, 0, 0.2);
+  border-top: 6px solid #ed1e25; /* Couleur rouge */
   border-radius: 50%;
   width: 50px;
   height: 50px;

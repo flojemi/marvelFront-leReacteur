@@ -15,7 +15,7 @@ function App() {
       <div className="app-wrapper">
         <Topnav />
         <Routes>
-          <Route path="/" element={<CharactersPage />}></Route>
+          <Route path="/characters" element={<CharactersPage />}></Route>
           <Route path="/comics" element={<ComicsPage />}></Route>
         </Routes>
       </div>

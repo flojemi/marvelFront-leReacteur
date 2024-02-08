@@ -12,7 +12,7 @@ export default function Topnav() {
   };
 
   const handleCharactersClick = () => {
-    navigate("");
+    navigate("/characters");
   };
 
   return (
