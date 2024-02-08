@@ -67,6 +67,7 @@ export default function CharDetailsPage() {
     fetchComicsData();
   }, [charData]);
 
+  // JSX Retourné
   return (
     <div className="CharDetails-container">
       <div className="left-part">
@@ -90,11 +91,9 @@ export default function CharDetailsPage() {
         ) : (
           comicsData &&
           comicsData.map((comics) => {
-            console.log("test", comics.data.data);
+            // console.log("test", comics.data.data);
             return (
-              <>
-                <p>test</p>
-              </>
+              <ComicsCard key={comics.data.data._id} comicsData={comics.data.data} />
             );
           })
         )}

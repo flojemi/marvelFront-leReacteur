@@ -1,6 +1,7 @@
 .ComicsCard-container {
-  height: 300px;
-  width: 250px;
+  /* height: 300px; */
+  width: 400px;
+  padding: 20px;
   box-shadow: 0 0 9px rgba(0, 0, 0, 0.583);
   border-radius: 10px;
   background-color: rgb(10, 10, 10);
@@ -10,7 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 
   transition: transform 0.15s ease;
 }
@@ -20,13 +21,9 @@
   transform: scale(1.05);
 }
 
-/* .character-name {
-  height: 15px;
-}
-
-.character-image {
+.comics-image {
   height: calc(100% - 15px);
   width: 100%;
   object-fit: cover;
   border-radius: 10px;
-} */
+}
