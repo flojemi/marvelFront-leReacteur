@@ -20,18 +20,24 @@ export default function Pagination({
     <div className="pagination-nav">
       <button
         onClick={handlePreviousClick}
-        className={currentPage > 1 ? "" : "pagination-hidden"}
+        className={
+          currentPage > 1 ? "pagination-button" : "pagination-button pagination-hidden"
+        }
       >
-        Previous
+        {"<"}
       </button>
       <p>
         {currentPage}/{totalPage}
       </p>
       <button
         onClick={handleNextClick}
-        className={currentPage < totalPage ? "" : "pagination-hidden"}
+        className={
+          currentPage < totalPage
+            ? "pagination-button"
+            : "pagination-button pagination-hidden"
+        }
       >
-        Next
+        {">"}
       </button>
     </div>
   );

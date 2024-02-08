@@ -8,3 +8,7 @@
 .pagination-hidden {
   display: none;
 }
+
+.pagination-button {
+  border-radius: 50%;
+}
