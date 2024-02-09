@@ -15,8 +15,8 @@ import SearchBar from "../../Components/SearchBar/SearchBar";
 // ======================================= \\
 // ======================================= \\
 
+// CardsType correspond au type de cards à charger (characters || comics)
 export default function CardsPage({ cardsType }) {
-  // CardsType correspond au type de cards à charger (characters || comics)
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -34,14 +34,10 @@ export default function CardsPage({ cardsType }) {
   // Ref to store previous value
   const previousCardsType = useRef(cardsType);
 
-  // ========================================================================== \\
-  // ========== Au chargement de la page + changement de cardsType ============ \\
-  // ========================================================================== \\
+  // ======================================================================================== \\
+  // ========== useEffect lié au chargement de la page + changement de cardsType ============ \\
+  // ======================================================================================== \\
   useEffect(() => {
-    setIsLoading(true);
-    setSearchEntered("");
-
-    // Récupère les données
     const fetchData = async () => {
       // Analyse query string
       const queryParams = new URLSearchParams(location.search);
@@ -64,58 +60,90 @@ export default function CardsPage({ cardsType }) {
       setIsLoading(false);
     };
 
-    // Permet de réinitialiser la pagination lorsqu'il y a changement de cardsType
+    // |||||||||||| S'il y a un changement de cardsType ||||||||||| \\
+    // ------------------------------------------------------------ \\
     if (cardsType !== previousCardsType.current) {
       setCurrentPage(1);
       previousCardsType.current = cardsType;
     }
 
-    fetchData();
+    // Si pas de recherche en cours, recharge toutes les cartes
+    if (!searchEntered) {
+      setIsLoading(true);
+      fetchData();
+    }
   }, [cardsType, currentPage, reload]);
 
-  // ========================================================================== \\
-  // ========= Lorsque l'utilisateur commence à entrer une recherche ========== \\
-  // ========================================================================== \\
+  // ======================================================== \\
+  // ========= useEffect lié au champ de recherche ========== \\
+  // ======================================================== \\
   useEffect(() => {
     const fetchData = async () => {
-      // Si un caractère dans le champ de recherche
-      if (searchEntered) {
-        setIsLoading(true);
+      setIsLoading(true);
 
-        const response = await axios.get(
-          `http://localhost:3000/marvel/api/${cardsType}/byname/${searchEntered}`
-        );
-        console.log("response.data.data =>\n", response.data.data);
+      // Analyse query string
+      const queryParams = new URLSearchParams(location.search);
 
-        setTotalResults(response.data.data.count);
-        setData(response.data.data.results);
-        setIsLoading(false);
-      }
+      // Limit de 100 par défaut lors d'une recherche
+      setCurrentLimitValue(100);
 
-      // Si aucun caractère
-      if (!searchEntered && searchEntered !== previousSearchEntered) {
-        setReload(!reload);
-      }
+      // Skip calculé en fonction du numéro de la page
+      const currentSkipValue = currentLimitValue * (currentPage - 1);
+
+      const response = await axios.get(
+        `http://localhost:3000/marvel/api/${cardsType}/byname/${searchEntered}?${`skip=${currentSkipValue}`}${`&limit=${currentLimitValue}`}`
+      );
+
+      // States update
+      setTotalResults(response.data.data.count);
+      setData(response.data.data.results);
+      setIsLoading(false);
     };
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-    // ~~~~~~ Délai pour les dactylo qui rechargent le composant trop vite ~~~~~ \\
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-
-    // S'il y a déjà un délai en route, l'efface pour le réinitialiser
-    if (timeoutId) clearTimeout(timeoutId);
-
-    // Définit un nouveau délai (350ms)
-    const id = setTimeout(() => {
-      fetchData();
-    }, 350);
-
-    // récupère le nouvelle identifiant du timeout
-    setTimeoutId(id);
-
-    // Garde en mémoire la nouvelle valeur recherchée
+    // Conserve en mémoire l'ancienne valeur de recherche
     setPreviousSearchEntered(searchEntered);
-  }, [searchEntered]);
+
+    // ||||||||||||||| S'il y a un critère de recherche ||||||||||| \\
+    // ------------------------------------------------------------ \\
+    if (searchEntered) {
+      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
+      // ~~~~~~ Délai pour les dactylo qui rechargent le composant trop vite ~~~~~ \\
+      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
+
+      if (searchEntered !== previousSearchEntered) {
+        setCurrentPage(1);
+
+        // S'il y a déjà un délai en route, l'efface pour le réinitialiser
+        if (timeoutId) clearTimeout(timeoutId);
+
+        // Définit un nouveau délai (350ms)
+        const id = setTimeout(() => {
+          // Si le critère de recherche évolue, go sur la page 1 avec une nouvelle recherche
+          fetchData();
+        }, 350);
+
+        setTimeoutId(id);
+      } else {
+        fetchData();
+      }
+    }
+
+    // |||||||||| S'il n'y a plus de critère de recherche ||||||||| \\
+    // ------------------------------------------------------------ \\
+    if (!searchEntered && searchEntered !== previousSearchEntered) {
+      setCurrentPage(1);
+
+      // S'il y a déjà un délai en route, l'efface pour le réinitialiser
+      if (timeoutId) clearTimeout(timeoutId);
+
+      // Définit un nouveau délai (350ms)
+      const id = setTimeout(() => {
+        // Relance le useEffect initial qui affiche tous les personnages
+        setTimeoutId(id);
+        setReload(!reload);
+      }, 350);
+    }
+  }, [searchEntered, currentPage]);
 
   // ======================================================== \\
   // ================= Handle functions ===================== \\
@@ -124,8 +152,9 @@ export default function CardsPage({ cardsType }) {
     navigate(`/characters/${charId}`, { state: { id: charId } });
   };
 
-  // JSX retourné
-
+  // ======================================================== \\
+  // ================== JSX retourné ======================== \\
+  // ======================================================== \\
   /*
     Affiche dans un premier temps le loader.
     Une fois les données récupérées charge les cartes correspondantes
