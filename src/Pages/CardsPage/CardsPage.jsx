@@ -103,13 +103,13 @@ export default function CardsPage({ cardsType }) {
     // Conserve en mémoire l'ancienne valeur de recherche
     setPreviousSearchEntered(searchEntered);
 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
+    // ~~~~~~ Mise en place d'un delay car composant recharge trop vite ~~~~~~~ \\
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
+
     // ||||||||||||||| S'il y a un critère de recherche ||||||||||| \\
     // ------------------------------------------------------------ \\
     if (searchEntered) {
-      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-      // ~~~~~~ Délai pour les dactylo qui rechargent le composant trop vite ~~~~~ \\
-      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
-
       if (searchEntered !== previousSearchEntered) {
         setCurrentPage(1);
 
@@ -120,7 +120,7 @@ export default function CardsPage({ cardsType }) {
         const id = setTimeout(() => {
           // Si le critère de recherche évolue, go sur la page 1 avec une nouvelle recherche
           fetchData();
-        }, 350);
+        }, 400);
 
         setTimeoutId(id);
       } else {
@@ -141,7 +141,7 @@ export default function CardsPage({ cardsType }) {
         // Relance le useEffect initial qui affiche tous les personnages
         setTimeoutId(id);
         setReload(!reload);
-      }, 350);
+      }, 400);
     }
   }, [searchEntered, currentPage]);
 

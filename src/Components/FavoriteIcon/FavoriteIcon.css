@@ -1,0 +1,21 @@
+.FavoriteIcon-container {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+  transition: transform 0.15s ease;
+}
+
+.FavoriteIcon-container:hover {
+  transform: scale(1.1);
+
+  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
