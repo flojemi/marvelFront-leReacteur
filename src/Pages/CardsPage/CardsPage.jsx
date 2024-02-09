@@ -10,13 +10,13 @@ import axios from "axios";
 import CharacterCard from "../../Components/CharacterCard/CharacterCard";
 import ComicsCard from "../../Components/ComicsCard/ComicsCard";
 import Pagination from "../../Components/Pagination/Pagination";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 
 // ======================================= \\
-// =========== Page exportée ============= \\
 // ======================================= \\
 
-// LoadType correspond au type de cards à charger (characters, comics)
 export default function CardsPage({ cardsType }) {
+  // CardsType correspond au type de cards à charger (characters || comics)
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -26,13 +26,20 @@ export default function CardsPage({ cardsType }) {
   const [totalResults, setTotalResults] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLimitValue, setCurrentLimitValue] = useState(100);
+  const [searchEntered, setSearchEntered] = useState("");
+  const [previousSearchEntered, setPreviousSearchEntered] = useState("");
+  const [timeoutId, setTimeoutId] = useState(null);
+  const [reload, setReload] = useState(false);
 
   // Ref to store previous value
   const previousCardsType = useRef(cardsType);
 
-  // Au chargement de la page + changement de loadType
+  // ========================================================================== \\
+  // ========== Au chargement de la page + changement de cardsType ============ \\
+  // ========================================================================== \\
   useEffect(() => {
     setIsLoading(true);
+    setSearchEntered("");
 
     // Récupère les données
     const fetchData = async () => {
@@ -64,9 +71,55 @@ export default function CardsPage({ cardsType }) {
     }
 
     fetchData();
-  }, [cardsType, currentPage]);
+  }, [cardsType, currentPage, reload]);
 
-  // Handle functions
+  // ========================================================================== \\
+  // ========= Lorsque l'utilisateur commence à entrer une recherche ========== \\
+  // ========================================================================== \\
+  useEffect(() => {
+    const fetchData = async () => {
+      // Si un caractère dans le champ de recherche
+      if (searchEntered) {
+        setIsLoading(true);
+
+        const response = await axios.get(
+          `http://localhost:3000/marvel/api/${cardsType}/byname/${searchEntered}`
+        );
+        console.log("response.data.data =>\n", response.data.data);
+
+        setTotalResults(response.data.data.count);
+        setData(response.data.data.results);
+        setIsLoading(false);
+      }
+
+      // Si aucun caractère
+      if (!searchEntered && searchEntered !== previousSearchEntered) {
+        setReload(!reload);
+      }
+    };
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
+    // ~~~~~~ Délai pour les dactylo qui rechargent le composant trop vite ~~~~~ \\
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \\
+
+    // S'il y a déjà un délai en route, l'efface pour le réinitialiser
+    if (timeoutId) clearTimeout(timeoutId);
+
+    // Définit un nouveau délai (350ms)
+    const id = setTimeout(() => {
+      fetchData();
+    }, 350);
+
+    // récupère le nouvelle identifiant du timeout
+    setTimeoutId(id);
+
+    // Garde en mémoire la nouvelle valeur recherchée
+    setPreviousSearchEntered(searchEntered);
+  }, [searchEntered]);
+
+  // ======================================================== \\
+  // ================= Handle functions ===================== \\
+  // ======================================================== \\
   const handleCharClick = (charId) => {
     navigate(`/characters/${charId}`, { state: { id: charId } });
   };
@@ -80,6 +133,7 @@ export default function CardsPage({ cardsType }) {
 
   return (
     <main className="characters-container">
+      <SearchBar searchEntered={searchEntered} setSearchEntered={setSearchEntered} />
       <Pagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

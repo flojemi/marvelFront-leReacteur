@@ -1,6 +1,6 @@
 .ComicsCard-container {
   /* height: 300px; */
-  width: 400px;
+  width: 350px;
   padding: 20px;
   box-shadow: 0 0 9px rgba(0, 0, 0, 0.583);
   border-radius: 10px;
@@ -26,4 +26,10 @@
   width: 100%;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.comics-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: underline;
 }

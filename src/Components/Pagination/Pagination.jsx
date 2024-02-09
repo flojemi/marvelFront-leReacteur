@@ -24,10 +24,10 @@ export default function Pagination({
           currentPage > 1 ? "pagination-button" : "pagination-button pagination-hidden"
         }
       >
-        {"<"}
+        {"Previous"}
       </button>
       <p>
-        {currentPage}/{totalPage}
+        Page {currentPage}/{totalPage}
       </p>
       <button
         onClick={handleNextClick}
@@ -37,7 +37,7 @@ export default function Pagination({
             : "pagination-button pagination-hidden"
         }
       >
-        {">"}
+        {"Next"}
       </button>
     </div>
   );

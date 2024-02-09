@@ -9,7 +9,9 @@ export default function CharacterCard({ characterData, handleCharClick }) {
   let imageLink;
   const isImage = !characterData.thumbnail.path.includes("image_not_available");
   if (isImage)
-    imageLink = `${characterData.thumbnail.path}.${characterData.thumbnail.extension}`;
+    imageLink = `${characterData.thumbnail.path}/standard_fantastic.${characterData.thumbnail.extension}`;
+
+  // TODO : Ajouter la description au survol de la carte
 
   // JSX retourné
   return (
@@ -27,7 +29,7 @@ export default function CharacterCard({ characterData, handleCharClick }) {
         <p className="character-image">Image isn't available</p>
       )}
       <p className="character-name">{characterData.name}</p>
-      {characterData.description ? <p>{characterData.description}</p> : ""}
+      {/* {characterData.description ? <p>{characterData.description}</p> : ""} */}
     </div>
   );
 }

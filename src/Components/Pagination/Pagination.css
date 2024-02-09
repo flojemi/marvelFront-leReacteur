@@ -2,13 +2,21 @@
   width: 100vw;
   display: flex;
   justify-content: center;
-  gap: 30px;
+  align-items: center;
+  gap: 25px;
+  color: white;
+}
+
+.pagination-button {
+  display: inline-block;
+  width: 70px;
+  height: 25px;
+  border-radius: 5px;
+
+  background-color: #ed1e25;
+  color: white;
 }
 
 .pagination-hidden {
   display: none;
-}
-
-.pagination-button {
-  border-radius: 50%;
 }
