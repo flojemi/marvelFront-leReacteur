@@ -52,6 +52,10 @@ export default function CharacterCard({ characterData, handleCharClick }) {
       )}
       <p className="character-name">{characterData.name}</p>
 
+      <div className="character-description">
+        {characterData.description ? <p>{characterData.description}</p> : ""}
+      </div>
+
       <div className="FavoriteIcon-character">
         <FavoriteIcon
           isFavorite={isFavorite}
@@ -61,6 +65,3 @@ export default function CharacterCard({ characterData, handleCharClick }) {
     </div>
   );
 }
-
-// TODO : Ajouter la description au survol de la carte
-/* {characterData.description ? <p>{characterData.description}</p> : ""} */

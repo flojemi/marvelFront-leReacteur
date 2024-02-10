@@ -33,6 +33,24 @@
   border-radius: 10px;
 }
 
+.character-description {
+  position: absolute;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.CharacterCard-container:hover .character-description {
+  background-color: black;
+  box-shadow: 0 0 9px rgba(0, 0, 0, 0.583);
+  opacity: 1;
+}
+
 .FavoriteIcon-character {
   position: absolute;
   top: -12.5px;

@@ -41,7 +41,7 @@
 | Frontend     | Mise en place des barres de recherches                                         | Done   |
 | Frontend     | Gestion des favoris à l'aide des cookies                                       | Done   |
 | Frontend     | Construction de la vue Favoris                                                 | Done   |
-| Frontend     | Ajustement du look de l'application                                            |        |
+| Frontend     | Ajustement du look de l'application                                            | Done   |
 | Global       | Hébergement du back et du front sur Northflank et Netlify                      |        |
 | Backend      | Création de la base de donnée utilisateur MongoDb                              |        |
 | BackEnd      | Création du userRouter                                                         |        |

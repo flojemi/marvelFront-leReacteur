@@ -6,6 +6,10 @@
   overflow-x: hidden;
 }
 
+.hidden {
+  display: none;
+}
+
 .loader {
   border: 8px solid rgba(0, 0, 0, 0.2);
   border-top: 6px solid #ed1e25; /* Couleur rouge */

@@ -34,8 +34,13 @@ export default function ComicsCard({ comicsData }) {
   return (
     <div className="ComicsCard-container">
       <p className="comics-title">{comicsData.title}</p>
+
       <img src={imageLink} alt={`${comicsData.name} image`} className="comics-image" />
-      <span className="comics-description">{comicsData.description}</span>
+
+      <div className="comics-description">
+        {comicsData.description ? <p>{comicsData.description}</p> : ""}
+      </div>
+
       <div className="FavoriteIcon-comics">
         <FavoriteIcon
           isFavorite={isFavorite}

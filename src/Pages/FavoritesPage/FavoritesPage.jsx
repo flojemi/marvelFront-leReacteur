@@ -2,12 +2,14 @@ import "./FavoritesPage.css";
 
 import { useFavorites } from "../../Hooks/useFavorites";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import CharacterCard from "../../Components/CharacterCard/CharacterCard";
 import ComicsCard from "../../Components/ComicsCard/ComicsCard";
 
 export default function FavoritesPage() {
+  const navigate = useNavigate();
   const { favorites } = useFavorites();
 
   const [charData, setCharData] = useState([]);

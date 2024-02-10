@@ -22,7 +22,7 @@
 
 .favorites-comics-container {
   width: 100vw;
-  height: 700px;
+  height: 500px;
 
   display: flex;
   flex-direction: column;
@@ -40,7 +40,6 @@
   background-color: grey;
 
   overflow-x: auto;
-  white-space: nowrap;
 }
 
 .favorites-carousel > * {
@@ -52,11 +51,11 @@
   justify-content: center;
   align-items: center;
 
-  width: 300px;
-  height: 40px;
+  width: 250px;
+  height: 30px;
   margin-left: 20px;
 
-  font-size: 23px;
+  font-size: 20px;
   font-weight: bold;
 
   background-color: #ed1e25;
