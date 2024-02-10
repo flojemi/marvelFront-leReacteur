@@ -5,7 +5,7 @@ import "./CharacterCard.css";
 import Cookies from "js-cookie";
 
 // Import des composants
-import { useFavorites } from "../../Hooks/FavoritesContext";
+import { useFavorites } from "../../Hooks/useFavorites";
 import FavoriteIcon from "../FavoriteIcon/FavoriteIcon";
 import { useState } from "react";
 
@@ -15,10 +15,7 @@ import { useState } from "react";
 export default function CharacterCard({ characterData, handleCharClick }) {
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  // TODO : mettre en place un useEffect pour récupérer le statut du favoris au chargement du composant
-  // TODO : dans le useContext ajouter les intéractions avec le cookie (parse, stringify)
+  const [isFavorite, setIsFavorite] = useState(favorites.includes(characterData._id));
 
   // Vérifie s'il y a une image et monte le lien
   let imageLink;
@@ -30,9 +27,9 @@ export default function CharacterCard({ characterData, handleCharClick }) {
   const handleFavoriteClick = (event, charId) => {
     event.stopPropagation();
 
-    Cookies.set("marvel-favorites", charId);
-    addFavorite(charId);
-    setIsFavorite(true);
+    isFavorite ? removeFavorite(charId) : addFavorite(charId);
+
+    setIsFavorite(!isFavorite);
   };
 
   // JSX retourné
