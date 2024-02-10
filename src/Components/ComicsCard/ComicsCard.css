@@ -1,6 +1,6 @@
 .ComicsCard-container {
-  display: relative;
-  /* height: 300px; */
+  position: relative;
+  height: 550px;
   width: 350px;
   padding: 20px;
   box-shadow: 0 0 9px rgba(0, 0, 0, 0.583);
@@ -24,8 +24,9 @@
 
 .comics-image {
   height: calc(100% - 15px);
+  height: 300px;
   width: 100%;
-  object-fit: cover;
+  object-fit: fill;
   border-radius: 10px;
 }
 
@@ -33,4 +34,10 @@
   font-size: 18px;
   font-weight: bold;
   text-decoration: underline;
+}
+
+.FavoriteIcon-comics {
+  position: absolute;
+  top: -12.5px;
+  right: -12.5px;
 }

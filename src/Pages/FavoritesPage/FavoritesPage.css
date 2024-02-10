@@ -1,0 +1,65 @@
+.FavoritesPage-container {
+  width: 100vw;
+  height: calc(100vh - 50px);
+  margin-top: 50px;
+  padding: 20px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 70px;
+}
+
+.favorites-characters-container {
+  width: 100vw;
+  height: 400px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.favorites-comics-container {
+  width: 100vw;
+  height: 700px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.favorites-carousel {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  padding: 0 20px;
+
+  height: 100%;
+  background-color: grey;
+
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.favorites-carousel > * {
+  flex-shrink: 0;
+}
+
+.favorites-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 300px;
+  height: 40px;
+  margin-left: 20px;
+
+  font-size: 23px;
+  font-weight: bold;
+
+  background-color: #ed1e25;
+  color: white;
+  border-radius: 5px;
+}

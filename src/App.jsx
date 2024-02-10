@@ -2,14 +2,14 @@
 import "./App.css";
 
 // Import des packages
-import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Cookies from "js-cookie";
-
-// Import des hooks, pages et composants
+// Import des hooks personnalisés
 import { FavoritesProvider } from "./Hooks/useFavorites";
+// Import des pages
 import CardsPage from "./Pages/CardsPage/CardsPage";
 import CharDetailsPage from "./Pages/CharDetailsPage/CharDetailsPage";
+import FavoritesPage from "./Pages/FavoritesPage/FavoritesPage";
+// Import des composants
 import Topnav from "./Components/Topnav/Topnav";
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
             ></Route>
             <Route path="/characters/:id" element={<CharDetailsPage />}></Route>
             <Route path="/comics" element={<CardsPage cardsType="comics" />}></Route>
+            <Route path="/favorites" element={<FavoritesPage />}></Route>
           </Routes>
         </div>
       </FavoritesProvider>

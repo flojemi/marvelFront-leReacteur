@@ -15,6 +15,10 @@ export default function Topnav() {
     navigate("/characters");
   };
 
+  const handleFavoritesClick = () => {
+    navigate("/favorites");
+  };
+
   return (
     <nav>
       <div className="nav-container">
@@ -28,7 +32,7 @@ export default function Topnav() {
           <button className="nav-button" onClick={handleComicsClick}>
             Comics
           </button>
-          <button className="nav-button" onClick={handleCharactersClick}>
+          <button className="nav-button" onClick={handleFavoritesClick}>
             Favorites
           </button>
         </div>

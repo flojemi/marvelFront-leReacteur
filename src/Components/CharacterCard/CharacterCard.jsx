@@ -2,12 +2,11 @@
 import "./CharacterCard.css";
 
 // Import des packages
-import Cookies from "js-cookie";
+import { useState } from "react";
 
 // Import des composants
 import { useFavorites } from "../../Hooks/useFavorites";
 import FavoriteIcon from "../FavoriteIcon/FavoriteIcon";
-import { useState } from "react";
 
 // ============================================ \\
 // ============ Composant exporté ============= \\
@@ -15,7 +14,11 @@ import { useState } from "react";
 export default function CharacterCard({ characterData, handleCharClick }) {
   const { favorites, addFavorite, removeFavorite } = useFavorites();
 
-  const [isFavorite, setIsFavorite] = useState(favorites.includes(characterData._id));
+  const [isFavorite, setIsFavorite] = useState(
+    favorites[0] &&
+      favorites[0].characters &&
+      favorites[0].characters.includes(characterData._id)
+  );
 
   // Vérifie s'il y a une image et monte le lien
   let imageLink;
@@ -27,7 +30,7 @@ export default function CharacterCard({ characterData, handleCharClick }) {
   const handleFavoriteClick = (event, charId) => {
     event.stopPropagation();
 
-    isFavorite ? removeFavorite(charId) : addFavorite(charId);
+    isFavorite ? removeFavorite(charId, "characters") : addFavorite(charId, "characters");
 
     setIsFavorite(!isFavorite);
   };
@@ -49,7 +52,7 @@ export default function CharacterCard({ characterData, handleCharClick }) {
       )}
       <p className="character-name">{characterData.name}</p>
 
-      <div className="FavoriteIcon">
+      <div className="FavoriteIcon-character">
         <FavoriteIcon
           isFavorite={isFavorite}
           onClick={(event) => handleFavoriteClick(event, characterData._id)}

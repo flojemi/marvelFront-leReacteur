@@ -5,8 +5,8 @@ export default function FavoriteIcon({ isFavorite, onClick }) {
     <>
       <div className="FavoriteIcon-container" onClick={onClick}>
         <svg
-          width="25px"
-          height="25px"
+          width={isFavorite ? "25px" : "20px"}
+          height={isFavorite ? "25px" : "20px"}
           viewBox="0 0 1024 1024"
           fill={isFavorite ? "#ffae00" : ""}
           className="icon"

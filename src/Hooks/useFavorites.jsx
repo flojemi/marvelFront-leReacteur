@@ -6,53 +6,72 @@ const FavoritesContext = createContext();
 export const useFavorites = () => useContext(FavoritesContext);
 
 export const FavoritesProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
+  let favoritesArr = [{ characters: [] }, { comics: [] }];
 
-  // Fonction qui permet d'initialiser les données depuis un cookie
+  // Setup states
+  const [favorites, setFavorites] = useState(favoritesArr);
+
+  // Fonction qui permet d'initialiser les favoris
   const initFavoritesFromCookie = () => {
     const cookie = Cookies.get("marvel-favorites");
 
     if (cookie) {
-      const parsedFavorites = cookie.split(",");
-      setFavorites(parsedFavorites);
+      // Si cookie existe déjà, récupère les données
+      const parsedCookie = JSON.parse(cookie);
+      setFavorites(parsedCookie);
+    } else {
+      // Sinon le crée
+      const favoritesStr = JSON.stringify(favorites);
+      Cookies.set("marvel-favorites", favoritesStr);
     }
   };
 
   // Fonction qui permet d'ajouter un favoris
-  const addFavorite = (newFavorite) => {
-    // Récupère les données du cookie
-    const cookie = Cookies.get("marvel-favorites");
-    let stringifiedCookie;
+  const addFavorite = (favoriteId, from) => {
+    const copy = structuredClone(favorites);
 
-    if (cookie) {
-      // Parse les données
-      const parsedCookie = cookie.split(",");
-      // Push le nouvel id
-      parsedCookie.push(newFavorite);
-      // Stringify
-      stringifiedCookie = parsedCookie.join(",");
+    if (from === "characters") {
+      copy[0].characters.push(favoriteId);
+      setFavorites(copy);
     }
 
-    // Met à jour le cookie
-    cookie
-      ? Cookies.set("marvel-favorites", stringifiedCookie)
-      : Cookies.set("marvel-favorites", newFavorite);
+    if (from === "comics") {
+      copy[1].comics.push(favoriteId);
+      setFavorites(copy);
+    }
 
-    // Met à jour le state
-    setFavorites((previousFavorites) => [...previousFavorites, newFavorite]);
+    const favoritesStr = JSON.stringify(copy);
+    Cookies.set("marvel-favorites", favoritesStr);
   };
 
   // Fonction qui permet de retirer un favoris
-  const removeFavorite = (favoriteId) => {
-    const cookie = Cookies.get("marvel-favorites");
-    const parsedCookie = cookie.split(",");
-    const newParsedCookie = parsedCookie.filter((id) => id !== favoriteId);
-    const newStringifiedCookie = newParsedCookie.join(",");
-    Cookies.set("marvel-favorites", newStringifiedCookie);
+  const removeFavorite = (favoriteId, from) => {
+    const copy = structuredClone(favorites);
 
-    setFavorites((previousFavorites) =>
-      previousFavorites.filter((favorite) => favorite !== favoriteId)
-    );
+    if (from === "characters") {
+      // Clone la liste des characters
+      const characters = copy[0].characters;
+      // Monte le nouveau tableau après filtre
+      const newCharacters = characters.filter((charId) => charId !== favoriteId);
+      // Update les favoris liés au personnages
+      copy[0].characters = newCharacters;
+      // Met à jour le state
+      setFavorites(copy);
+    }
+
+    if (from === "comics") {
+      // Clone la liste des characters
+      const comics = copy[1].comics;
+      // Monte le nouveau tableau après filtre
+      const newCharacters = comics.filter((charId) => charId !== favoriteId);
+      // Update les favoris liés au personnages
+      copy[1].comics = newCharacters;
+      // Met à jour le state
+      setFavorites(copy);
+    }
+
+    const favoritesStr = JSON.stringify(copy);
+    Cookies.set("marvel-favorites", favoritesStr);
   };
 
   // Au chargement du context
