@@ -46,7 +46,8 @@
 }
 
 .CharacterCard-container:hover .character-description {
-  background-color: black;
+  background-color: rgb(52, 52, 52);
+  padding: 10px;
   box-shadow: 0 0 9px rgba(0, 0, 0, 0.583);
   opacity: 1;
 }

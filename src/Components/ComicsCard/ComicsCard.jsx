@@ -37,9 +37,13 @@ export default function ComicsCard({ comicsData }) {
 
       <img src={imageLink} alt={`${comicsData.name} image`} className="comics-image" />
 
-      <div className="comics-description">
-        {comicsData.description ? <p>{comicsData.description}</p> : ""}
-      </div>
+      {comicsData.description ? (
+        <div className="comics-description">
+          <p>{comicsData.description}</p>
+        </div>
+      ) : (
+        ""
+      )}
 
       <div className="FavoriteIcon-comics">
         <FavoriteIcon
