@@ -6,12 +6,15 @@ const FavoritesContext = createContext();
 export const useFavorites = () => useContext(FavoritesContext);
 
 export const FavoritesProvider = ({ children }) => {
+  // Modèle inscris en cookie
   let favoritesArr = [{ characters: [] }, { comics: [] }];
 
   // Setup states
   const [favorites, setFavorites] = useState(favoritesArr);
 
-  // Fonction qui permet d'initialiser les favoris
+  // ================================================================= \\
+  // ======== Fonction qui permet d'initialiser les favoris ========== \\
+  // ================================================================= \\
   const initFavoritesFromCookie = () => {
     const cookie = Cookies.get("marvel-favorites");
 
@@ -26,7 +29,9 @@ export const FavoritesProvider = ({ children }) => {
     }
   };
 
-  // Fonction qui permet d'ajouter un favoris
+  // ================================================================= \\
+  // =========== Fonction qui permet d'ajouter un favoris ============ \\
+  // ================================================================= \\
   const addFavorite = (favoriteId, from) => {
     const copy = structuredClone(favorites);
 
@@ -44,6 +49,9 @@ export const FavoritesProvider = ({ children }) => {
     Cookies.set("marvel-favorites", favoritesStr);
   };
 
+  // ================================================================= \\
+  // ========== Fonction qui permet de retirer un favoris ============ \\
+  // ================================================================= \\
   // Fonction qui permet de retirer un favoris
   const removeFavorite = (favoriteId, from) => {
     const copy = structuredClone(favorites);

@@ -52,7 +52,7 @@ export default function CardsPage({ cardsType }) {
 
       // Récupère les données correspondantes au type de cartes
       const response = await axios.get(
-        `http://localhost:3000/marvel/api/${cardsType}?${`skip=${currentSkipValue}`}${`&limit=${currentLimitValue}`}`
+        `https://site--backend-marvel--s9nznht574vq.code.run/marvel/api/${cardsType}?${`skip=${currentSkipValue}`}${`&limit=${currentLimitValue}`}`
       );
 
       setTotalResults(response.data.data.count);
@@ -91,7 +91,7 @@ export default function CardsPage({ cardsType }) {
       const currentSkipValue = currentLimitValue * (currentPage - 1);
 
       const response = await axios.get(
-        `http://localhost:3000/marvel/api/${cardsType}/byname/${searchEntered}?${`skip=${currentSkipValue}`}${`&limit=${currentLimitValue}`}`
+        `https://site--backend-marvel--s9nznht574vq.code.run/marvel/api/${cardsType}/byname/${searchEntered}?${`skip=${currentSkipValue}`}${`&limit=${currentLimitValue}`}`
       );
 
       // States update

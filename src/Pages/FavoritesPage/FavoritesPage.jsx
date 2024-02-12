@@ -28,10 +28,14 @@ export default function FavoritesPage() {
         const favoritesComics = favorites[1].comics;
 
         const favoritesCharactersPromises = favoritesCharacters.map((charId) =>
-          axios.get(`http://localhost:3000/marvel/api/characters/byid/${charId}`)
+          axios.get(
+            `https://site--backend-marvel--s9nznht574vq.code.run/marvel/api/characters/byid/${charId}`
+          )
         );
         const favoritesComicsPromises = favoritesComics.map((comicsId) =>
-          axios.get(`http://localhost:3000/marvel/api/comics/byid/${comicsId}`)
+          axios.get(
+            `https://site--backend-marvel--s9nznht574vq.code.run/marvel/api/comics/byid/${comicsId}`
+          )
         );
 
         // Exécute la requête pour récupérer les données

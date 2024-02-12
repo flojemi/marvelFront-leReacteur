@@ -23,7 +23,7 @@ export default function CharDetailsPage() {
 
       try {
         const response = await axios.get(
-          `http://localhost:3000/marvel/api/characters/byid/${location.state.id}`
+          `https://site--backend-marvel--s9nznht574vq.code.run/marvel/api/characters/byid/${location.state.id}`
         );
 
         setCharData(response.data.data);
@@ -43,7 +43,9 @@ export default function CharDetailsPage() {
         try {
           // Pour chaque comics, monter une promesse, exécuter les promesses
           const comicsPromises = charData.comics.map((comicsId) =>
-            axios.get(`http://localhost:3000/marvel/api/comics/byid/${comicsId}`)
+            axios.get(
+              `https://site--backend-marvel--s9nznht574vq.code.run/marvel/api/comics/byid/${comicsId}`
+            )
           );
 
           const comicsData = await Promise.all(comicsPromises);
